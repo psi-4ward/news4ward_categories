@@ -14,6 +14,8 @@
 class News4wardCategoriesHelper extends Controller
 {
 
+	protected static $arrJumpTo = array();
+
 	/**
 	 * Return the WHERE-condition if a the url has an cat-parameter
 	 * @return bool|string
@@ -37,16 +39,27 @@ class News4wardCategoriesHelper extends Controller
 	 */
 	public function categoryParseArticle($obj,$objArticles,$objTemplate)
 	{
-		$this->import('Database');
-		$objJumpTo = $this->Database->prepare('SELECT tl_page.id, tl_page.alias
-												FROM tl_page
-												LEFT JOIN tl_news4ward ON (tl_page.id=tl_news4ward.jumpToList)
-												WHERE tl_news4ward.id=?')
-							->execute($objArticles->pid);
-
-		if($objJumpTo->numRows)
+		if(!isset(self::$arrJumpTo[$objArticles->pid]))
 		{
-			$objTemplate->categoryHref = $this->generateFrontendUrl($objJumpTo->row(),'/cat/'.urlencode($objArticles->category));
+			$this->import('Database');
+			$objJumpTo = $this->Database->prepare('SELECT tl_page.id, tl_page.alias
+													FROM tl_page
+													LEFT JOIN tl_news4ward ON (tl_page.id=tl_news4ward.jumpToList)
+													WHERE tl_news4ward.id=?')
+								->execute($objArticles->pid);
+			if($objJumpTo->numRows)
+			{
+				self::$arrJumpTo[$objArticles->pid] = $objJumpTo->row();
+			}
+			else
+			{
+				self::$arrJumpTo[$objArticles->pid] = false;
+			}
+		}
+
+		if(self::$arrJumpTo[$objArticles->pid])
+		{
+			$objTemplate->categoryHref = $this->generateFrontendUrl(self::$arrJumpTo[$objArticles->pid],'/cat/'.urlencode($objArticles->category));
 		}
 		else
 		{
