@@ -37,7 +37,21 @@ class News4wardCategoriesHelper extends Controller
 	 */
 	public function categoryParseArticle($obj,$objArticles,$objTemplate)
 	{
-		$objTemplate->categoryHref = $this->generateFrontendUrl($GLOBALS['objPage']->row(),'/cat/'.urlencode($objArticles->category));
+		$this->import('Database');
+		$objJumpTo = $this->Database->prepare('SELECT tl_page.id, tl_page.alias
+												FROM tl_page
+												LEFT JOIN tl_news4ward ON (tl_page.id=tl_news4ward.jumpToList)
+												WHERE tl_news4ward.id=?')
+							->execute($objArticles->pid);
+
+		if($objJumpTo->numRows)
+		{
+			$objTemplate->categoryHref = $this->generateFrontendUrl($objJumpTo->row(),'/cat/'.urlencode($objArticles->category));
+		}
+		else
+		{
+			$objTemplate->categoryHref = $this->generateFrontendUrl($GLOBALS['objPage']->row(),'/cat/'.urlencode($objArticles->category));
+		}
 	}
 }
 
