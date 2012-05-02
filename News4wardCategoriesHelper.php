@@ -11,7 +11,7 @@
  * @licence LGPL
  */
 
-class News4wardCategoriesHelper extends System
+class News4wardCategoriesHelper extends Controller
 {
 
 	/**
@@ -25,6 +25,19 @@ class News4wardCategoriesHelper extends System
 		$cat = mysql_real_escape_string(urldecode($this->Input->get('cat')));
 
 		return 'tl_news4ward_article.category="'.$cat.'"';
+	}
+
+
+	/**
+	 * Add category link to the template
+	 *
+	 * @param Object $obj
+	 * @param Database_Result $objArticles
+	 * @param FrontendTemplate $objTemplate
+	 */
+	public function categoryParseArticle($obj,$objArticles,$objTemplate)
+	{
+		$objTemplate->categoryHref = $this->generateFrontendUrl($GLOBALS['objPage']->row(),'/cat/'.urlencode($objArticles->category));
 	}
 }
 

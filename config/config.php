@@ -17,3 +17,6 @@ $GLOBALS['FE_MOD']['news4ward']['news4wardCategories'] = 'ModuleNews4wardCategor
 
 // News4wardList Filter HOOK
 $GLOBALS['TL_HOOKS']['News4wardListFilter'][] = array('News4wardCategoriesHelper','categoryFilter');
+
+// News4wardParseArticle HOOK
+$GLOBALS['TL_HOOKS']['News4wardParseArticle'][] = array('News4wardCategoriesHelper','categoryParseArticle');
