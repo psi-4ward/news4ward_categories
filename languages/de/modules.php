@@ -12,6 +12,6 @@
  */
 
 // FE-Modules
-$GLOBALS['TL_LANG']['FMD']['news4wardCategories']    = array('Kategorie-Filter', 'Fügt der einen Kategorie-Filter hinzu.');
+$GLOBALS['TL_LANG']['FMD']['news4wardCategories']    = array('Kategorie-Filter', 'Fügt einen Kategorie-Filter hinzu.');
 
 ?>
