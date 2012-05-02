@@ -82,7 +82,7 @@ class ModuleNews4wardCategories extends News4ward
 		while($objCats->next())
 		{
 			$objCats->href = $this->generateFrontendUrl($objJumpTo->row(),'/cat/'.urlencode($objCats->category));
-
+			$objCats->active = ($this->Input->get('cat') == $objCats->category);
 		}
 
 		$this->Template->categories = $objCats->fetchAllAssoc();

@@ -6,7 +6,7 @@
 
 <ul>
 <?php foreach($this->categories as $cat): ?>
-<li><a href="<?php echo $cat['href'];?>"><?php echo $cat['category'];?></a></li>
+<li><a href="<?php echo $cat['href'];?>"<?php if($cat['active']) echo ' class="active"';?>><?php echo $cat['category'];?></a></li>
 <?php endforeach; ?>
 </ul>
 
