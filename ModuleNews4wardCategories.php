@@ -83,6 +83,21 @@ class ModuleNews4wardCategories extends News4ward
 		{
 			$objCats->href = $this->generateFrontendUrl($objJumpTo->row(),'/cat/'.urlencode($objCats->category));
 			$objCats->active = ($this->Input->get('cat') == $objCats->category);
+
+			// set active item for the active filter hinting
+			if($this->Input->get('cat') == $objCats->category)
+			{
+				if(!isset($GLOBALS['news4ward_filter_hint']))
+				{
+					$GLOBALS['news4ward_filter_hint'] = array();
+				}
+
+				$GLOBALS['news4ward_filter_hint']['category'] = array
+				(
+					'hint'  	=> $this->news4ward_filterHint,
+					'value'		=> $objCats->category
+				);
+			}
 		}
 
 		$this->Template->categories = $objCats->fetchAllAssoc();
