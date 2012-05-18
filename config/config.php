@@ -12,9 +12,6 @@
  */
 
 
-// Add Table to news4ward
-$GLOBALS['BE_MOD']['content']['news4ward']['tables'][] = 'tl_news4ward_categories';
-
 // FE-Modules
 $GLOBALS['FE_MOD']['news4ward']['news4wardCategories'] = 'ModuleNews4wardCategories';
 
@@ -23,5 +20,3 @@ $GLOBALS['TL_HOOKS']['News4wardListFilter'][] = array('News4wardCategoriesHelper
 
 // News4wardParseArticle HOOK
 $GLOBALS['TL_HOOKS']['News4wardParseArticle'][] = array('News4wardCategoriesHelper','categoryParseArticle');
-
-?>

@@ -11,6 +11,7 @@
  * @licence LGPL
  */
 
+$GLOBALS['TL_LANG']['tl_news4ward_article']['category']    = array('Kategorie', 'Dieser Kategorie gehört der Beitrag an.');
 
-$GLOBALS['TL_LANG']['tl_news4ward_article']['categories']    		= array('Kategorien', 'Weisen Sie dem Beitrag Kategorien zu.');
-$GLOBALS['TL_LANG']['tl_news4ward_article']['categories_legend']   	= 'Kategorien';
+
+?>

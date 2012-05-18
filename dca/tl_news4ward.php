@@ -1,17 +1,38 @@
-<?php if(!defined('TL_ROOT')) {die('You cannot access this file directly!'); }
+<?php if(!defined('TL_ROOT')) die('You cannot access this file directly!');
 
 /**
- * @copyright 4ward.media 2012 <http://www.4wardmedia.de>
+ * News4ward
+ * a contentelement driven news/blog-system
+ *
  * @author Christoph Wiechert <wio@psitrax.de>
+ * @copyright 4ward.media GbR <http://www.4wardmedia.de>
+ * @package news4ward_categories
+ * @filesource
+ * @licence LGPL
  */
 
-array_insert($GLOBALS['TL_DCA']['tl_news4ward']['list']['global_operations'],0, array
+// Field
+$GLOBALS['TL_DCA']['tl_news4ward']['fields']['categories'] = array
 (
-	'categories' => array
+	'label'                   => &$GLOBALS['TL_LANG']['tl_news4ward']['categories'],
+	'exclude'                 => true,
+	'inputType'               => 'multiColumnWizard',
+	'eval'                    => array
 	(
-		'label'               => &$GLOBALS['TL_LANG']['tl_news4ward']['categories'],
-		'href'                => 'table=tl_news4ward_categories',
-		'class'               => 'header_edit_all',
-		'attributes'          => 'onclick="Backend.getScrollOffset();" style="background-image:url(system/modules/news4ward_categories/html/icon.gif)"'
+		'columnFields' => array
+		(
+			'category' => array
+			(
+				'label'     => array('&nbsp;'),
+				'inputType' => 'text'
+			)
+		)
 	)
-));
+);
+
+
+// Palette
+$GLOBALS['TL_DCA']['tl_news4ward']['palettes']['default'] = str_replace(';{protected_legend',';{categories_legend},categories;{protected_legend',$GLOBALS['TL_DCA']['tl_news4ward']['palettes']['default']);
+
+
+?>
