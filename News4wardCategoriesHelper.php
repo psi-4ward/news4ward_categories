@@ -23,10 +23,12 @@ class News4wardCategoriesHelper extends Controller
 	public function categoryFilter()
 	{
 		if(!$this->Input->get('cat')) return false;
+		$this->import('Database');
+		$objCat = $this->Database->prepare('SELECT id FROM tl_news4ward_categories WHERE alias=?')->execute($this->Input->get('cat'));
 
-		$cat = mysql_real_escape_string(urldecode($this->Input->get('cat')));
+		if(!$objCat->numRows) return false;
 
-		return 'tl_news4ward_article.category="'.$cat.'"';
+		return 'EXISTS (SELECT * FROM tl_news4ward_category_article	WHERE tl_news4ward_category_article.pid = tl_news4ward_article.id AND tl_news4ward_category_article.cid = '.$objCat->numRows.');';
 	}
 
 
@@ -36,6 +38,7 @@ class News4wardCategoriesHelper extends Controller
 	 * @param Object $obj
 	 * @param Database_Result $objArticles
 	 * @param FrontendTemplate $objTemplate
+	 * // FIXME: implemente the new tree structure
 	 */
 	public function categoryParseArticle($obj,$objArticles,$objTemplate)
 	{

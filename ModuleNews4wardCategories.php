@@ -40,7 +40,7 @@ class ModuleNews4wardCategories extends News4ward
 		}
 
 		$this->news_archives = $this->sortOutProtected(deserialize($this->news4ward_archives));
-
+		
 		// Return if there are no archives
 		if (!is_array($this->news_archives) || count($this->news_archives) < 1)
 		{
@@ -56,9 +56,7 @@ class ModuleNews4wardCategories extends News4ward
 	 */
 	protected function compile()
     {
-		$objCats = $this->Database->execute('SELECT DISTINCT(category) FROM tl_news4ward_article
-											 WHERE tl_news4ward_article.pid IN ('.implode(',',$this->news_archives).') AND category <> ""
-											 ORDER BY category ASC');
+		$objCats = $this->Database->execute('SELECT * FROM tl_news4ward_categories ORDER BY sorting');
 
 		// just return if on empty result
 		if(!$objCats->numRows)
@@ -66,6 +64,24 @@ class ModuleNews4wardCategories extends News4ward
 			$this->Template->categories = array();
 			return;
 		}
+		$arrCats = array();
+		while($objCats->next())
+		{
+			if($arrCats->pid == 0)
+			{
+				$arrCats[$objCats->id] = $objCats->name;
+			}
+			else
+			{
+				$arrCats[$objCats->pid][$objCats->id] = $objCats->name;
+			}
+		}
+		var_dump($arrCats);
+		
+
+		exit;
+
+
 
 		// get jumpTo page
 		if($this->jumpTo)
