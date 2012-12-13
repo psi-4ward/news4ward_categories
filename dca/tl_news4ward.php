@@ -1,4 +1,4 @@
-<?php if(!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * News4ward
@@ -34,5 +34,3 @@ $GLOBALS['TL_DCA']['tl_news4ward']['fields']['categories'] = array
 // Palette
 $GLOBALS['TL_DCA']['tl_news4ward']['palettes']['default'] = str_replace(';{protected_legend',';{categories_legend},categories;{protected_legend',$GLOBALS['TL_DCA']['tl_news4ward']['palettes']['default']);
 
-
-?>

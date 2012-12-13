@@ -1,4 +1,4 @@
-<?php if(!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * News4ward
@@ -50,4 +50,3 @@ class tl_news4ward_categories extends System
 		return $arrCategories;
 	}
 }
-?>
