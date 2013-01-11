@@ -30,7 +30,7 @@ class Categories extends \News4ward\Module\Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new ßBackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### News4ward Categories ###';
 			$objTemplate->title = $this->headline;
