@@ -83,8 +83,13 @@ class Categories extends \News4ward\Module\Module
 
 		while($objCats->next())
 		{
+			if($this->news4ward_showQuantity)
+		        {
+				$objCount = $this->Database->prepare('SELECT COUNT(*) AS quantity FROM tl_news4ward_article WHERE category=?')->execute($objCats->category);
+			}
 			$objCats->href = $this->generateFrontendUrl($objJumpTo->row(),'/cat/'.urlencode($objCats->category));
 			$objCats->active = ($this->Input->get('cat') == $objCats->category);
+			$objCats->quantity = $objCount->quantity;
 
 			// set active item for the active filter hinting
 			if($this->Input->get('cat') == $objCats->category)
