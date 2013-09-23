@@ -58,9 +58,10 @@ class Categories extends \News4ward\Module\Module
 	 */
 	protected function compile()
     {
-		$objCats = $this->Database->execute('SELECT DISTINCT(category) FROM tl_news4ward_article
-											 WHERE tl_news4ward_article.pid IN ('.implode(',',$this->news_archives).') AND category <> ""
-											 ORDER BY category ASC');
+		$objCats = $this->Database->execute('SELECT category, count(id) as quantity FROM tl_news4ward_article
+		                                     WHERE tl_news4ward_article.pid IN ('.implode(',',$this->news_archives).') AND category <> ""
+                                                     GROUP BY category
+                                                     ORDER BY category ASC');
 
 		// just return if on empty result
 		if(!$objCats->numRows)
@@ -83,13 +84,14 @@ class Categories extends \News4ward\Module\Module
 
 		while($objCats->next())
 		{
-			if($this->news4ward_showQuantity)
-		        {
-				$objCount = $this->Database->prepare('SELECT COUNT(*) AS quantity FROM tl_news4ward_article WHERE category=?')->execute($objCats->category);
-			}
 			$objCats->href = $this->generateFrontendUrl($objJumpTo->row(),'/cat/'.urlencode($objCats->category));
 			$objCats->active = ($this->Input->get('cat') == $objCats->category);
-			$objCats->quantity = $objCount->quantity;
+			
+			// don’t show quantity if it is not enabled			
+			if(!$this->news4ward_showQuantity)
+		        {
+			$objCats->quantity = false;
+		        }
 
 			// set active item for the active filter hinting
 			if($this->Input->get('cat') == $objCats->category)
