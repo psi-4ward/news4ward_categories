@@ -29,8 +29,8 @@
         },
         "extra": {
                 "contao": {
-                        "symlinks": {
-                                ".": "system/modules/news4ward_categories"
+                        "sources": {
+                                "": "system/modules/news4ward_categories"
                         }
                 }
         }
