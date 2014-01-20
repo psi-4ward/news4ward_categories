@@ -13,7 +13,7 @@
 
 namespace Psi\News4ward\Module;
 
-class Categories extends \News4ward\Module\Module
+class Categories extends Module
 {
     /**
    	 * Template
