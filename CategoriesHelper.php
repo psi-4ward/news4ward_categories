@@ -27,9 +27,13 @@ class CategoriesHelper extends \Controller
 	{
 		if(!$this->Input->get('cat')) return false;
 
-		$cat = mysql_real_escape_string(urldecode($this->Input->get('cat')));
+		$cat = urldecode($this->Input->get('cat'));
 
-		return 'tl_news4ward_article.category="'.$cat.'"';
+		return array
+		(
+			'where'  => 'tl_news4ward_article.category=?',
+			'values' => array($cat)
+		);
 	}
 
 
