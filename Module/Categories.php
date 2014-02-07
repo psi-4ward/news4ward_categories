@@ -82,16 +82,18 @@ class Categories extends Module
 			$objJumpTo = $GLOBALS['objPage'];
 		}
 
+		$arrCats = array();
 		while($objCats->next())
 		{
-			$objCats->href = $this->generateFrontendUrl($objJumpTo->row(),'/cat/'.urlencode($objCats->category));
-			$objCats->active = ($this->Input->get('cat') == $objCats->category);
+			$arr = $objCats->row();
+			$arr['href'] = $this->generateFrontendUrl($objJumpTo->row(),'/cat/'.urlencode($objCats->category));
+			$arr['active'] = ($this->Input->get('cat') == $objCats->category);
 			
 			// don’t show quantity if it is not enabled			
 			if(!$this->news4ward_showQuantity)
-		        {
-			$objCats->quantity = false;
-		        }
+			{
+				$arr['quantity'] = false;
+			}
 
 			// set active item for the active filter hinting
 			if($this->Input->get('cat') == $objCats->category)
@@ -107,9 +109,10 @@ class Categories extends Module
 					'value'		=> $objCats->category
 				);
 			}
+			$arrCats[] = $arr;
 		}
 
-		$this->Template->categories = $objCats->fetchAllAssoc();
+		$this->Template->categories = $arrCats;
 	}
 
 
