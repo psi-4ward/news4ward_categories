@@ -40,38 +40,31 @@ class CategoriesHelper extends \Controller
 	/**
 	 * Add category link to the template
 	 *
-	 * @param Object $obj
-	 * @param Database_Result $objArticles
+	 * @param \Psi\News4ward\Module\Module $obj
+	 * @param array $arrArticle
 	 * @param FrontendTemplate $objTemplate
 	 */
-	public function categoryParseArticle($obj,$objArticles,$objTemplate)
+	public function categoryParseArticle($obj, $arrArticle, $objTemplate)
 	{
-		if(!isset(self::$arrJumpTo[$objArticles->pid]))
-		{
-			$this->import('Database');
-			$objJumpTo = $this->Database->prepare('SELECT tl_page.id, tl_page.alias
-													FROM tl_page
-													LEFT JOIN tl_news4ward ON (tl_page.id=tl_news4ward.jumpToList)
-													WHERE tl_news4ward.id=?')
-								->execute($objArticles->pid);
-			if($objJumpTo->numRows)
-			{
-				self::$arrJumpTo[$objArticles->pid] = $objJumpTo->row();
-			}
-			else
-			{
-				self::$arrJumpTo[$objArticles->pid] = false;
-			}
-		}
+        if(!isset(self::$arrJumpTo[$arrArticle['pid']])) {
+            $this->import('Database');
+            $objJumpTo = $this->Database->prepare('SELECT tl_page.id, tl_page.alias
+                                                   FROM tl_page
+                                                   LEFT JOIN tl_news4ward ON (tl_page.id=tl_news4ward.jumpToList)
+                                                   WHERE tl_news4ward.id=?')
+                                        ->execute($article['pid']);
+            if($objJumpTo->numRows) {
+                self::$arrJumpTo[$arrArticle['pid']] = $objJumpTo->row();
+            } else {
+                self::$arrJumpTo[$arrArticle['pid']] = false;
+            }
+        }
 
-		if(self::$arrJumpTo[$objArticles->pid])
-		{
-			$objTemplate->categoryHref = $this->generateFrontendUrl(self::$arrJumpTo[$objArticles->pid],'/cat/'.urlencode($objArticles->category));
-		}
-		else
-		{
-			$objTemplate->categoryHref = $this->generateFrontendUrl($GLOBALS['objPage']->row(),'/cat/'.urlencode($objArticles->category));
-		}
+        if(self::$arrJumpTo[$arrArticle['pid']]) {
+            $objTemplate->categoryHref = $this->generateFrontendUrl(self::$arrJumpTo[$article['pid']], '/cat/'.urlencode($arrArticle['category']));
+        } else {
+            $objTemplate->categoryHref = $this->generateFrontendUrl($GLOBALS['objPage']->row(), '/cat/'.urlencode($arrArticle['category']));
+        }
 	}
 }
 
