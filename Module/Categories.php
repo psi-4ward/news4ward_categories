@@ -49,7 +49,14 @@ class Categories extends Module
 			return '';
 		}
 
-		return parent::generate();
+		$strBuffer = parent::generate();
+
+		if (count($this->Template->categories) == 0)
+		{
+			return '';
+		}
+
+		return $strBuffer;
 	}
 
 
