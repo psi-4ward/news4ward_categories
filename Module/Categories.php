@@ -94,7 +94,7 @@ class Categories extends Module
 		{
 			$arr = $objCats->row();
 			$arr['href'] = $this->generateFrontendUrl($objJumpTo->row(),'/cat/'.urlencode($objCats->category));
-			$arr['active'] = ($this->Input->get('cat') == $objCats->category);
+			$arr['active'] = (urldecode($this->Input->get('cat')) === $objCats->category);
 			
 			// don’t show quantity if it is not enabled			
 			if(!$this->news4ward_showQuantity)
