@@ -11,5 +11,5 @@
  * @licence LGPL
  */
 
-$GLOBALS['TL_LANG']['tl_news4ward']['categories']     = array('Kategorien', 'Diese Kategorien stehen in einem Betrag zur Auswahl');
+$GLOBALS['TL_LANG']['tl_news4ward']['categories']     = array('Kategorien', 'Diese Kategorien stehen in einem Beitrag zur Auswahl');
 $GLOBALS['TL_LANG']['tl_news4ward']['categories_legend'] = 'Kategorien';
