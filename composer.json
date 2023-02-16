@@ -28,6 +28,9 @@
         "replace":{
                 "contao-legacy/news4ward_categories": "*"
         },
+        "conflict": {
+                "psi/news4ward_multicategories": "*"
+        },
         "extra": {
                 "contao": {
                         "sources": {
