@@ -52,7 +52,7 @@ class CategoriesHelper extends \Controller
                                                    FROM tl_page
                                                    LEFT JOIN tl_news4ward ON (tl_page.id=tl_news4ward.jumpToList)
                                                    WHERE tl_news4ward.id=?')
-                                        ->execute($article['pid']);
+                                        ->execute($arrArticle['id']);
             if($objJumpTo->numRows) {
                 self::$arrJumpTo[$arrArticle['pid']] = $objJumpTo->row();
             } else {
