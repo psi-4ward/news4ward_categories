@@ -48,11 +48,11 @@ class CategoriesHelper extends \Controller
 	{
         if(!isset(self::$arrJumpTo[$arrArticle['pid']])) {
             $this->import('Database');
-            $objJumpTo = $this->Database->prepare('SELECT tl_page.id, tl_page.alias
+            $objJumpTo = $this->Database->prepare('SELECT tl_page.*
                                                    FROM tl_page
                                                    LEFT JOIN tl_news4ward ON (tl_page.id=tl_news4ward.jumpToList)
                                                    WHERE tl_news4ward.id=?')
-                                        ->execute($article['pid']);
+                                        ->execute($arrArticle['pid']);
             if($objJumpTo->numRows) {
                 self::$arrJumpTo[$arrArticle['pid']] = $objJumpTo->row();
             } else {
@@ -61,7 +61,7 @@ class CategoriesHelper extends \Controller
         }
 
         if(self::$arrJumpTo[$arrArticle['pid']]) {
-            $objTemplate->categoryHref = $this->generateFrontendUrl(self::$arrJumpTo[$article['pid']], '/cat/'.urlencode($arrArticle['category']));
+            $objTemplate->categoryHref = $this->generateFrontendUrl(self::$arrJumpTo[$arrArticle['pid']], '/cat/'.urlencode($arrArticle['category']));
         } else {
             $objTemplate->categoryHref = $this->generateFrontendUrl($GLOBALS['objPage']->row(), '/cat/'.urlencode($arrArticle['category']));
         }
