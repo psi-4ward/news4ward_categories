@@ -1,32 +1,41 @@
 {
-        "name":"psi/news4ward_categories",
-        "description":"Categories menu frontend module for News4ward",
-        "keywords":["news", "blog", "categories"],
-        "type":"contao-module",
+        "name": "imi/news4ward_categories",
+        "description": "Categories menu frontend module for News4ward",
+        "keywords": [
+                "news",
+                "blog",
+                "categories"
+        ],
+        "type": "contao-module",
         "license": "LGPL-3.0-or-later",
-        "authors":[
+        "authors": [
                 {
-                        "name":"Christoph Wiechert",
-                        "email":"wio@psitrax.de.de",
-                        "homepage":"http://4wardmedia.de",
-                        "role":"Developer"
+                        "name": "Christoph Wiechert",
+                        "email": "wio@psitrax.de.de",
+                        "homepage": "http://4wardmedia.de",
+                        "role": "Developer"
+                },
+                {
+                        "name": "iMi digital GmbH",
+                        "homepage": "https://www.imi-digital.de",
+                        "role": "Maintainer"
                 }
         ],
-        "support":{
-                "email":"wio@psitrax.de.de",
-                "issues":"https://github.com/psi-4ward/news4ward_categories/issues?direction=desc&sort=created&state=open",
-                "forum":"https://community.contao.org/de/forumdisplay.php?110-4ward",
-                "irc":"irc://irc.freenode.org/contao.de",
-                "source":"https://github.com/psi-4ward/news4ward_categories"
+        "support": {
+                "email": "wio@psitrax.de.de",
+                "forum": "https://community.contao.org/de/forumdisplay.php?110-4ward",
+                "irc": "irc://irc.freenode.org/contao.de",
+                "source": "https://github.com/imi-digital/news4ward_categories"
         },
-        "require":{
-                "php":">=5.3",
+        "require": {
+                "php": ">=5.3",
                 "contao/core-bundle": "^3.2.1 || ^4.4",
                 "contao-community-alliance/composer-plugin": "^2.4 || ^3.0",
                 "psi/news4ward": "~2"
         },
-        "replace":{
-                "contao-legacy/news4ward_categories": "*"
+        "replace": {
+                "contao-legacy/news4ward_categories": "*",
+                "psi/news4ward": "self.version"
         },
         "extra": {
                 "contao": {
