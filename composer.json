@@ -22,10 +22,10 @@
                 }
         ],
         "support": {
-                "email": "wio@psitrax.de.de",
                 "forum": "https://community.contao.org/de/forumdisplay.php?110-4ward",
+                "issues": "https://github.com/iMi-digital/news4ward_categories/issues",
                 "irc": "irc://irc.freenode.org/contao.de",
-                "source": "https://github.com/imi-digital/news4ward_categories"
+                "source": "https://github.com/iMi-digital/news4ward_categories"
         },
         "require": {
                 "php": ">=5.3",
